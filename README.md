@@ -86,24 +86,21 @@ Implemented in this repo (not aspirational):
 
 ---
 
-````markdown
 ## Architecture
 
-DataPilot uses a simple pipeline where the LLM interprets the question, while Pandas remains the source of truth for calculations.
+### Query path
 
-### Query Path
 
-```mermaid
 flowchart TD
-    Q[User question] --> P[LLM planner]
-    P --> J[JSON AnalyticalPlan]
-    J --> V[validate_plan]
-    V -->|invalid| E[Typed error to UI]
-    V -->|valid| X[execute_plan - Pandas]
-    X --> C[select_visualization]
-    X --> A[LLM explanation on formatted numbers]
-    C --> UI[Answer + chart + analysis trail]
-    A --> UI
+  Q[User question] --> P[LLM planner]
+  P --> J[JSON AnalyticalPlan]
+  J --> V[validate_plan]
+  V -->|invalid| E[Typed error to UI]
+  V -->|valid| X[execute_plan Pandas]
+  X --> C[select_visualization]
+  X --> A[LLM explanation on formatted numbers]
+  C --> UI[Answer + chart + analysis trail]
+  A --> UI
 ```
 
 ### Backend layout
